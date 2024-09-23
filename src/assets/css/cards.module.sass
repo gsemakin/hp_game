@@ -1,0 +1,15 @@
+
+@import '@/css/variables.sass'
+
+.cards
+  --cards-columns: 6
+  --cards-rows: 3
+
+  display: grid
+  grid-template: repeat(var(--cards-rows), 1fr) / repeat(var(--cards-columns), 1fr)
+  gap: 20px
+  margin: 10px
+  height: auto
+  @media all and (max-width: 768px)
+    --cards-columns: 3
+    --cards-rows: 6
