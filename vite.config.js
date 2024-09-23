@@ -14,7 +14,6 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': path.resolve(__dirname) + '/src/assets/'
       }
-    },
-    base: '/hp_game'
+    }
   };
 });
