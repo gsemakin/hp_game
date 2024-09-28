@@ -15,7 +15,7 @@ document.querySelector('#app').innerHTML = `
     <div class="gameSpace" id="${gameSpaceId}">
     </div>
   </section>
-  <footer class="footer"> Footer </footer>
+  <footer class="footer"> GS 2024 </footer>
 `;
 
 const game = new App(document.querySelector(`#${gameSpaceId}`));
