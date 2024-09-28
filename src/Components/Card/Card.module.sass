@@ -1,4 +1,4 @@
-@import '@/css/variables.sass'
+@import '@/assets/css/variables.sass'
 
 .card_container
     perspective: 3000px
@@ -7,8 +7,7 @@
             transform: rotateY(180deg)
 
 .card
-    --cards-columns: 3
-    height: calc((95vh - $header__height - $footer__height)/var(--cards-columns))
+    height: calc((95vh - $header__height - $footer__height)/var(--cards-rows))
     width: 100%
     position: relative
     transform: rotateY(0)
@@ -16,8 +15,7 @@
     transition: all 0.6s cubic-bezier(0.785, 0.135, 0.15, 0.86)
     &:hover
         cursor: pointer
-    @media all and (max-width: 768px)
-        --cards-columns: 6
+
 
 .card_back, .card_front
     overflow: hidden
@@ -33,6 +31,13 @@
     z-index: 2
     transform: rotateY(0deg)
     background-color: #fafafa
+    overflow: hidden
+    &:hover
+        img
+            transform: scale(1.05)
+
+    img
+        transition: transform .4s ease-in-out
 
 .card_back
     backface-visibility: hidden

@@ -1,0 +1,498 @@
+@import '@/assets/css/variables.sass'
+
+.popupPersona
+  width: 100%
+  display: grid
+  grid-template: 1fr / 1fr
+  /*grid-template: 1fr / 520px 1fr*/
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  max-width: 1200px
+  max-height: 488px
+  height: 100%
+  z-index: 12
+  opacity: 0
+  animation: fadeIn forwards .5s
+
+  @keyframes fadeIn
+    0%
+      opacity: 0
+    100%
+      opacity: 1
+
+
+
+.popupPersona__img img
+  max-width: 100%
+  border-bottom-right-radius: 1em
+  position: relative
+  top: 50%
+  transform: translate(-1px, -50%)
+
+
+
+.popupPersona__text
+  z-index: 12
+  padding: 2.5em 1.525em
+  border-radius: 1em
+  background: $color_bg1
+  box-shadow: 20px 20px 40px 0 rgba(0, 0, 0, 0.15)
+  color: $color_title1
+  text-align: center
+  display: flex
+  flex-direction: column
+/*justify-content: space-between*/
+
+
+
+.popupPersona__text h3
+  color: $color_title1 !important
+  font-weight: 600
+  line-height: 1.25
+  margin-bottom: 1em
+
+
+.popupPersona__text p
+  color: $color_title1
+  text-align: center
+  font-size: 1em
+  font-style: normal
+  font-weight: 400
+  line-height: 1.6
+  margin: 0 !important
+
+
+.popupPersona__actions_block
+  margin-top: 1.77em
+  display: flex
+  flex-direction: column
+  row-gap: 1em
+
+
+.popupPersona__actions_block p
+  margin: 0 !important
+
+
+.popupPersona__close
+  width: 3.7em
+  height: 3.7em
+  border-radius: 100%
+  background: #FFF
+  box-shadow: 0px 3.05859px 6.11719px 0px rgba(0, 0, 0, 0.02), 0px 1.5293px 9.17578px -1.5293px rgba(0, 0, 0, 0.02), 0px 1.5293px 3.05859px 0px rgba(0, 0, 0, 0.03)
+  position: absolute
+  right: -1.3203em
+  top: 0
+  cursor: pointer
+
+
+.popupPersona__close:before, .popupPersona__close:after
+  content: ""
+  position: absolute
+  width: .15em
+  height: 1.25em
+  background: #535353
+  border-radius: .15em
+  top: 50%
+  left: 50%
+
+
+
+
+.popupPersona__close:before
+  transform: translate(-50%, -50%) rotate(45deg)
+
+
+.popupPersona__close:after
+  transform: translate(-50%, -50%) rotate(-45deg)
+
+
+
+.popupPersona .popupPersona__btn a
+  text-decoration: none !important
+  font-size: 1em !important
+  font-weight: 400
+  white-space: nowrap
+  line-height: inherit
+  outline: none !important
+  display: inline-flex
+  justify-content: center
+  align-items: center
+  padding: 0 2em
+  height: 2.4em
+  width: 14.8em
+  background: $color_bg2
+  border-radius: .6em
+  border: 0
+  color: white !important
+  cursor: pointer
+  transition: background .3s ease
+  border: 1px solid transparent
+
+
+
+.popupPersona .popupPersona__btn a:hover
+  background: $color_bg1
+  border: 1px solid #ffffff
+
+
+/*@media all and (max-width: 1440px) */
+
+/*    .popupPersona */
+/*        height: calc(100% * 0.406)*/
+/*        max-width: calc(100% - 8.5em)*/
+/*    */
+/**/
+
+@media all and (max-width: 768px)
+
+  .popupPersona__close
+    transform: translateY(-20%)
+
+
+  .popupPersona
+    height: auto !important
+    max-height: unset !important
+    grid-template: auto 1fr / 1fr
+    transform: translate(-50%, -50%) !important
+    max-width: calc(100% - 8.5em)
+
+
+
+  .popupPersona__img
+    margin: 0
+    grid-row: 1/2
+
+
+  .popupPersona__img img
+    border-top-left-radius: 1em
+    border-bottom-right-radius: 0 !important
+    transform: unset
+    top: 0
+
+
+  .popupPersona__text
+    grid-row: 2/3
+    margin-top: -1em
+    z-index: 13
+
+
+
+
+  /* fz handler */
+  .popupPersona
+    font-size: 20px
+
+
+
+@media all and (max-width: 1440px) and (min-width: 768.1px)
+  .popupPersona
+    font-size: 1.388vw
+    height: 30%
+    max-width: calc(100% - 8.5em)
+    transform: translate(-50%, -70%)
+
+
+  .popupPersona__img
+    margin: 1.381em 0
+
+
+
+
+@media all and (max-width: 768px)
+  .popupPersona
+    font-size: 2.7549vw !important
+
+
+
+
+@media all and (max-width: 840px)
+
+  .popupPersona__text
+    padding: 3em 1.025em
+
+
+
+
+
+/* overlay */
+
+section.persona__overlay_layer_unique
+  z-index: 11
+  background: rgba(0, 0, 0, .7)
+  -webkit-animation: .5s forwards changeBgr
+  animation: .5s forwards changeBgr
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw !important
+  height: 100vh !important
+
+
+/* select */
+
+.popupPersona .__select
+  position: relative
+  width: 14.8em
+  height: 2.4em
+  margin: 0 auto
+  color: #000000
+
+
+
+.popupPersona .__select[data-state="active"] .__select__title
+  position: relative
+  z-index: 14
+
+
+.popupPersona .__select[data-state="active"] .__select__title::before
+  transform: translate(-3px, -50%) rotate(-45deg)
+
+
+.popupPersona .__select[data-state="active"] .__select__title::after
+  transform: translate(3px, -50%) rotate(45deg)
+
+
+
+.popupPersona .__select[data-state="active"] .__select__content
+  opacity: 1
+  z-index: 13
+
+
+
+.popupPersona .__select__label + .__select__input + .__select__label
+  max-height: 40px
+  border-top-width: 1px
+
+
+.popupPersona .__select__title
+  display: flex
+  align-items: center
+  width: 100%
+  height: 100%
+  padding: .4em .8em
+  background-color: #ffffff
+  border-radius: .6em
+
+
+  cursor: pointer
+
+
+.popupPersona .__select__title::before,
+.popupPersona .__select__title::after
+  content: ""
+
+  position: absolute
+  top: 50%
+  right: .8em
+
+  display: block
+  width: .5em
+  height: .1em
+
+  transition: all 0.3s ease-out
+
+  background-color: #333333
+
+  transform: translate(-0.15em, -50%) rotate(45deg)
+
+
+.popupPersona .__select__title::after
+  transform: translate(0.15em, -50%) rotate(-45deg)
+
+
+.popupPersona .__select__title:hover
+  border-color: #535353
+
+
+.popupPersona .__select__title::before,
+.popupPersona .__select__title::after
+  background-color: #535353
+
+
+.popupPersona .reset
+  display: flex
+  width: 296px
+  height: 2.4em
+  padding: 8px 16px
+  margin: 0 auto
+  margin-bottom: 10px
+
+  border: solid 1px #c7ccd1
+  border-radius: 5px
+
+  transition: all 0.2s ease-out
+
+  cursor: pointer
+
+  font-weight: bold
+
+  background-color: #ffffff
+  color: #333333
+
+
+.popupPersona .reset:hover
+  background-color: #535353
+  color: #ffffff
+
+
+.popupPersona .__select__content
+  position: absolute
+  top: 40px
+  left: 3px
+
+  display: flex
+  flex-direction: column
+  width: calc(100% - 6px)
+
+  background-color: #ffffff
+
+  border: 1px solid #c7ccd1
+  border-top: none
+  border-bottom-left-radius: 5px
+  border-bottom-right-radius: 5px
+
+  transition: all 0.3s ease-out
+
+  opacity: 0
+  z-index: -1
+
+
+.popupPersona .__select__input
+  display: none
+
+
+.popupPersona .__select__input:checked + label
+  background-color: #dedede
+
+
+.popupPersona .__select__input:disabled + label
+  opacity: 0.6
+  pointer-events: none
+
+
+.popupPersona .__select__label
+  display: flex
+  align-items: center
+  width: 100%
+  height: 40px
+  max-height: 0
+  padding: 0 16px
+
+  transition: all 0.2s ease-out
+
+  cursor: pointer
+
+  overflow: hidden
+
+
+.popupPersona .__select__label + input + .__select__label
+  border-top: 0 solid #C7CCD160
+
+
+.popupPersona .__select__label :hover
+  background-color: #535353 !important
+  color: #ffffff
+
+
+
+  // form
+  h1
+    color: #d10490
+    font-family: "Arvo", serif
+    padding: 20px 40px
+    font-size: 42px
+    line-height: 52px
+    margin: 30px 0
+    text-align: center
+
+
+.container
+    left: 50%
+    position: absolute
+    top: 50%
+    -webkit-transform: translate(-50%, -50%)
+    -ms-transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%)
+    width: 80%
+
+
+.control_group
+    padding-top: 33px
+    position: relative
+    margin-bottom: 30px
+    -webkit-transform: translate3d(0, 0, 0)
+    transform: translate3d(0, 0, 0)
+
+
+.control_group input[type="text"]
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    border: 6px solid #9fa6b3
+    border-radius: 0
+    background: #fff
+    color: #222
+    font-family: "Poppins", sans-serif
+    font-size: 20px
+    font-weight: 400
+    outline: none
+    padding: 16px 15px
+    -webkit-transition-property: border, padding
+    -o-transition-property: border, padding
+    transition-property: border, padding
+    -webkit-transition-duration: 500ms
+    -o-transition-duration: 500ms
+    transition-duration: 500ms
+    -webkit-transition-timing-function: ease
+    -o-transition-timing-function: ease
+    transition-timing-function: ease
+    width: 100%
+
+
+.control_group input[type="text"] + label
+    color: #fff
+    display: block
+    font-weight: 500
+    left: 0
+    position: absolute
+    top: 0
+    -webkit-transform-origin: bottom
+    -ms-transform-origin: bottom
+    transform-origin: bottom
+    -webkit-transition: -webkit-transform 375ms ease-in-out 0ms
+    transition: -webkit-transform 375ms ease-in-out 0ms
+    -o-transition: transform 375ms ease-in-out 0ms
+    transition: transform 375ms ease-in-out 0ms
+    transition: transform 375ms ease-in-out 0ms, -webkit-transform 375ms ease-in-out 0ms
+
+
+.control_group input[type="text"] + label span
+    background: $color_bg2
+    display: block
+    padding: 5px 20px 5px 20px
+    -webkit-transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms
+    transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms
+    -o-transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms
+    transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms
+    transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms
+
+
+.control_group input[type="text"]:focus
+    border-color: $color_bg4
+    padding-bottom: 2px
+    padding-top: 30px
+
+
+.control_group input[type="text"]:focus + label
+    -webkit-transform: rotateX(180deg)
+    transform: rotateX(180deg)
+
+
+.control_group input[type="text"]:focus + label span
+    background: $color_bg4
+    -webkit-transform: rotateX(180deg)
+    transform: rotateX(180deg)
+

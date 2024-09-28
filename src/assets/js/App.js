@@ -1,14 +1,21 @@
 import fetchJson from '../utils/fetch-json';
 import Card from '@/Components/Card/Card.js';
-import cardsStyle from '@/css/cards.module.sass';
+import cardsStyle from '@/assets/css/cards.module.sass';
+import PopupForm from "../../Components/PopupForm/PopupForm.js";
 
+const ROWS_DESKTOP = 3;
+const COLUMNS_DESKTOP = 8;
 export default class App {
   static instance;
   characters = [];
   cards = {};
   selectedIndex;
   isBusy = false;
-  player_1;
+  totalScore;
+  pl1 = {name: 'Игрок 1', score: 0};
+  pl2 = {name: 'Игрок 2', score: 0};
+  players = [];
+  activePlayerIndex = 0;
 
   constructor(element) {
     if (App.instance) {
@@ -19,6 +26,13 @@ export default class App {
     this.el = element;
     this.startGame();
     this._initEvents();
+
+    //TODO: to place it in el
+    this.score1 = document.getElementById('js-score_1');
+    this.score2 = document.getElementById('js-score_2');
+    this.name1 = document.getElementById('js-name_1');
+    this.name2 = document.getElementById('js-name_2');
+
   }
 
   _initEvents() {
@@ -38,6 +52,10 @@ export default class App {
           this.selectedIndex = null;
           this.selectedKey = null;
           this.isBusy = false;
+          this._increaseScore();
+          if (++this.totalScore === Math.floor(ROWS_DESKTOP*COLUMNS_DESKTOP)/2) {
+            this.finishGame();
+          }
         }, 1500);
       } else if (this.selectedIndex && this.selectedIndex !== index) {
         this.isBusy = true;
@@ -47,19 +65,55 @@ export default class App {
           this.selectedIndex = null;
           this.selectedKey = null;
           this.isBusy = false;
+          this._changePlayer();
         }, 1000);
       } else {
         this.selectedIndex = index;
         this.selectedKey = key;
       }
     });
+
+    document.addEventListener('GAME/nextUser', e => {
+      this._changePlayer();
+    });
+    document.addEventListener('GAME/updateNames', e => {
+      this.name1.innerHTML = e.detail.name1 || this.pl1.name;
+      this.name2.innerHTML = e.detail.name2 || this.pl2.name;
+
+      if (e.detail.name1) {
+        this.pl1.name = e.detail.name1;
+      }
+      if (e.detail.name2) {
+        this.pl2.name = e.detail.name2;
+      }
+
+
+    });
+  }
+
+  _increaseScore() {
+    this.score1.innerHTML = (++this.players[this.activePlayerIndex].score).toString();
+  }
+
+  _changePlayer() {
+    this.activePlayerIndex = (this.players.length - 1) === this.activePlayerIndex ? 0 : this.activePlayerIndex + 1;
+    debugger
+    alert(`Сейчас ходит ${this.players[this.activePlayerIndex].name}`)
+  }
+
+
+  finishGame() {
+alert('game finished');
   }
 
   startGame() {
-    this._start();
+    const renderedPopup = new PopupForm(this._start.bind(this));
+    document.body.append(renderedPopup.element);
+
   }
 
   async _start() {
+    this.players = [this.pl1, this.pl2];
     this.characters = await this._getApiCharacters();
     this._renderCards();
   }
@@ -102,12 +156,15 @@ export default class App {
     let columns;
 
     if (window.matchMedia('(min-width: 768.1px)').matches) {
-      rows = 3;
-      columns = 6;
+      rows = ROWS_DESKTOP;
+      columns = COLUMNS_DESKTOP;
     } else {
       rows = 6;
       columns = 3;
     }
+
+    cardsWrapper.style.setProperty("--cards-columns", columns);
+    cardsWrapper.style.setProperty("--cards-rows", rows);
 
     const maxCards = rows * columns;
     const randomIndexes = this._getRandomIndexes().splice(0, maxCards / 2);
